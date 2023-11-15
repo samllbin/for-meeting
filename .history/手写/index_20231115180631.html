@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function foo() {}
+    const obj = {
+      name: "dcb",
+      age: 19,
+    };
+    let valueClass = Object.prototype.toString.call(obj),
+      type = valueClass.split(" ")[1].split("");
+    type.pop();
+    type.join("").toLowerCase();
+
+    console.log(foo.__proto__ === Function.prototype);
+    console.log(typeof obj);
+  </script>
+</html>
