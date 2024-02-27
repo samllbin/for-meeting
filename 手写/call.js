@@ -26,3 +26,15 @@ function getName() {
 }
 
 getName.mycall(obj);
+
+Function.prototype.mycall1 = function (context) {
+  if (typeof this !== "function") {
+    return;
+  }
+  const args = [...arguments].slice(1);
+  context = context ? context : window;
+  context.fn = this;
+  const result = context.fn(...args);
+  delete context.fn;
+  return result;
+};

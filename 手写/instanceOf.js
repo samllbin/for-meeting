@@ -13,6 +13,16 @@ function myInstanceOf(needJudge, host) {
   }
 }
 
+function myInstanceOf1(needJudge, host) {
+  let proto = Object.getPrototypeOf(needJudge);
+  let prototype = host.prototype;
+  while (true) {
+    if (!proto) return false;
+    if (proto === prototype) return true;
+    proto = Object.getPrototypeOf(proto);
+  }
+}
+
 const obj = {};
 const number = 1;
 const foo = function () {};

@@ -1,15 +1,16 @@
-function debounce(fn, wait) {
+function debounce(onclick, wait) {
   let timer = null;
 
   return function () {
-    const context = this;
-    const args = arguments;
-    if (timer) {
+    let context = this;
+    if (!timer) {
+      let id = setTimeout(onclick.apply(context, arguments), wait);
+      timer = id;
+    } else {
       clearTimeout(timer);
+      let id = setTimeout(onclick.apply(context, arguments), wait);
+      timer = id;
     }
-    timer = setTimeout(() => {
-      fn.apply(context, args);
-    }, wait);
   };
 }
 
@@ -39,7 +40,20 @@ function thrott(onclick, wait) {
       args = arguments;
     if (new Date() - current >= wait) {
       current = new Date();
-      onclick.apply(context, args);
+      return onclick.apply(context, args);
+    }
+  };
+}
+
+function thrott1(onclick, wait) {
+  let cur = new Date();
+
+  return function () {
+    let context = this;
+    let args = arguments;
+    if (new Date() - cur >= wait) {
+      cur = new Date();
+      return onclick.apply(context, args);
     }
   };
 }
