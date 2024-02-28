@@ -1,0 +1,2 @@
+[{"key":1,"data":"A","parentKey":0,"children":[{"key":3,"data":"C","parentKey":1,"children":[{"key":6,"data":"F","parentKey":3}]}]},{"key":2,"da
+ta":"B","parentKey":0,"children":[{"key":5,"data":"E","parentKey":2}]}]

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+        .tri {
+          width: 0;
+        height: 0;
+        border-bottom: 50px solid red;
+        border-right: 50px solid transparent;
+        border-left: 50px solid transparent;
+
+    作者：CUGGZ
+    链接：https://juejin.cn/post/6905539198107942919
+    来源：稀土掘金
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        }
+  </style>
+  <body>
+    <div class="tri"></div>
+  </body>
+  <script>
+    // function foo() {}
+    // const obj = {
+    //   name: "dcb",
+    //   age: 19,
+    // };
+    // let valueClass = Object.prototype.toString.call(obj),
+    //   type = valueClass.split(" ")[1].split("");
+    // console.log(valueClass);
+    // console.log(type);
+    // type.pop();
+
+    // console.log(foo.__proto__ === Function.prototype);
+    // console.log(type.join("").toLowerCase());
+    // console.log(obj);
+    // function sum(...args) {
+    //   let total = 0;
+    //   function temp() {
+    //     let args = arguments || [];
+    //     args = Array.from(args);
+
+    //     total = args.reduce((pre, cur) => {
+    //       return pre + cur;
+    //     }, total);
+    //     return temp;
+    //   }
+    //   temp.toString = function () {
+    //     console.log(total);
+    //   };
+    //   return temp(...args);
+    // }
+
+    // sum(1, 2)(3)(4, 5).toString();
+    // console.log(window.a, a);
+    var length = 10;
+    function fn() {
+      console.log(this.length);
+    }
+
+    var obj = {
+      length: 5,
+      method: function (fn) {
+        fn();
+        arguments[0]();
+      },
+    };
+
+    obj.method(fn, 1);
+  </script>
+</html>

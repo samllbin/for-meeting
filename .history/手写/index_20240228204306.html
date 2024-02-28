@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .tri {
+      width: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 100px solid red;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      /* border-top: 100px solid green; */
+    }
+  </style>
+  <body>
+    <div class="tri"></div>
+  </body>
+  <script>
+    // function foo() {}
+    // const obj = {
+    //   name: "dcb",
+    //   age: 19,
+    // };
+    // let valueClass = Object.prototype.toString.call(obj),
+    //   type = valueClass.split(" ")[1].split("");
+    // console.log(valueClass);
+    // console.log(type);
+    // type.pop();
+
+    // console.log(foo.__proto__ === Function.prototype);
+    // console.log(type.join("").toLowerCase());
+    // console.log(obj);
+    // function sum(...args) {
+    //   let total = 0;
+    //   function temp() {
+    //     let args = arguments || [];
+    //     args = Array.from(args);
+
+    //     total = args.reduce((pre, cur) => {
+    //       return pre + cur;
+    //     }, total);
+    //     return temp;
+    //   }
+    //   temp.toString = function () {
+    //     console.log(total);
+    //   };
+    //   return temp(...args);
+    // }
+
+    // sum(1, 2)(3)(4, 5).toString();
+    // console.log(window.a, a);
+    var length = 10;
+    function fn() {
+      console.log(this.length);
+    }
+
+    var obj = {
+      length: 5,
+      method: function (fn) {
+        fn();
+        arguments[0]();
+      },
+    };
+
+    obj.method(fn, 1);
+  </script>
+</html>
