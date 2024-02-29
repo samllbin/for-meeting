@@ -17,7 +17,7 @@ function deepclone1(obj) {
 
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
-      res[key] = typeof obj[key] === "object" ? deepclone1(obj[key]) : obj[key];
+      res[key] = typeof obj[key] === "object" ? deepclone(obj[key]) : obj[key];
     }
   }
 

@@ -33,7 +33,7 @@ let format1 = (nums) => {
     temp = number.split(".")[1];
     number = number.split(".")[0];
   }
-  let flag = number.length % 3;
+  let flag = number.length % 3 === 0;
   if (flag === 0) {
     res = number.match(/\d{3}/g).join(",") + "." + temp;
   } else {
@@ -41,8 +41,8 @@ let format1 = (nums) => {
       number.slice(0, flag) +
       "," +
       number.slice(flag).match(/\d{3}/g).join(",") +
-      "." +
-      temp;
+      ".";
+    temp;
   }
   return res;
 };

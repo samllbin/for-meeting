@@ -12,16 +12,17 @@ function deepClone(object) {
   return newObj;
 }
 
-function deepclone1(obj) {
-  let res = Array.isArray(obj) ? [] : {};
+function deepClone1(object) {
+  if (!object || typeof object !== "object") return;
+  let result = Array.isArray(object) ? [] : {};
 
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      res[key] = typeof obj[key] === "object" ? deepclone1(obj[key]) : obj[key];
+  for (let key in object) {
+    if (object.hasOwnProperty(key)) {
+      result[key] =
+        typeof object[key] === "object" ? deepClone1(object[key]) : object[key];
     }
   }
-
-  return res;
+  return result;
 }
 
 let obj = {

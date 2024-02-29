@@ -1,0 +1,1 @@
+function factory(constructor, ...args) {}
