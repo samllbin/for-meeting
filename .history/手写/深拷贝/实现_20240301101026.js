@@ -36,3 +36,15 @@ let newobj = deepClone(obj);
 
 obj.info.qq = "";
 console.log(newobj);
+
+function deepClone2(obj) {
+  if (typeof obj !== "object") return;
+  let res = Array.isArray(obj) ? [] : {};
+
+  for (key in obj) {
+    if (obj.hasWonProperty(key)) {
+      res[key] = typeof obj[key] === "object" ? deepClone2(obj[key]) : obj[key];
+    }
+  }
+  return res;
+}

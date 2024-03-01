@@ -36,3 +36,7 @@ let newobj = deepClone(obj);
 
 obj.info.qq = "";
 console.log(newobj);
+
+function deepClone2(obj) {
+  if (typeof obj !== "object") return;
+}
