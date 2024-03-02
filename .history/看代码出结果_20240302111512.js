@@ -215,7 +215,6 @@ console.log("script end");
 // async2 promise
 // promise 1
 // script end
-// promise 2
-// promise 3
 // async1 end
+// promise 2
 // setTimeout
