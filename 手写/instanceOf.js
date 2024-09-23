@@ -13,9 +13,9 @@ function myInstanceOf(needJudge, host) {
   }
 }
 
-function myInstanceOf1(needJudge, host) {
-  let proto = Object.getPrototypeOf(needJudge);
-  let prototype = host.prototype;
+function myInstanceOf(left, right) {
+  let proto = Object.getPrototypeOf(left);
+  let prototype = right.prototype;
   while (true) {
     if (!proto) return false;
     if (proto === prototype) return true;

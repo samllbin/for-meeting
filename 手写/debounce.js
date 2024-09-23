@@ -57,3 +57,15 @@ function thrott1(onclick, wait) {
     }
   };
 }
+
+function debounce(conclick, wait) {
+  let id = null;
+  return function () {
+    if (id) {
+      clearTimeout(id);
+      id = setTimeout(conclick, wait);
+    } else {
+      id = setTimeout(conclick, wait);
+    }
+  };
+}

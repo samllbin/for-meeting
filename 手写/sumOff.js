@@ -1,5 +1,4 @@
 function sum() {
-  // arguments = Array.from(arguments);
   arguments = Array.prototype.slice.call(arguments);
   let args = arguments || [];
   let total = 0;

@@ -146,7 +146,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 
   if (this.status === FULFILLED) {
     var promise2 = new MyPromise(function (resolve, reject) {
-      setTimeout(function () {
+      queueMicrotask(function () {
         try {
           if (typeof onFulfilled !== "function") {
             resolve(that.value);
@@ -157,7 +157,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
         } catch (error) {
           reject(error);
         }
-      }, 0);
+      });
     });
 
     return promise2;
@@ -165,7 +165,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 
   if (this.status === REJECTED) {
     var promise2 = new MyPromise(function (resolve, reject) {
-      setTimeout(function () {
+      queueMicrotask(function () {
         try {
           if (typeof onRejected !== "function") {
             reject(that.reason);
@@ -176,7 +176,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
         } catch (error) {
           reject(error);
         }
-      }, 0);
+      });
     });
 
     return promise2;
@@ -186,7 +186,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
   if (this.status === PENDING) {
     var promise2 = new MyPromise(function (resolve, reject) {
       that.onFulfilledCallbacks.push(function () {
-        setTimeout(function () {
+        queueMicrotask(function () {
           try {
             if (typeof onFulfilled !== "function") {
               resolve(that.value);
@@ -197,10 +197,10 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
           } catch (error) {
             reject(error);
           }
-        }, 0);
+        });
       });
       that.onRejectedCallbacks.push(function () {
-        setTimeout(function () {
+        queueMicrotask(function () {
           try {
             if (typeof onRejected !== "function") {
               reject(that.reason);
@@ -211,7 +211,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
           } catch (error) {
             reject(error);
           }
-        }, 0);
+        });
       });
     });
 
@@ -358,3 +358,43 @@ MyPromise.allSettled = function (promiseList) {
 };
 
 module.exports = MyPromise;
+
+function MyPromise(fn) {
+  this.resolveCallback = [];
+  this.rejectedCallback = [];
+  this.status = PENDING;
+  this.value = null;
+  var self = this;
+
+  function resolve(value) {
+    if (value instanceof Promise) {
+      return value.then(resolve, reject);
+    }
+    setTimeout(() => {
+      if (self.status === PENDING) {
+        self.status = FULFILLED;
+        self.value = value;
+        self.resolveCallback.map((callback) => callback(value));
+      }
+    }, 0);
+  }
+
+  function reject(value) {
+    if (value instanceof Promise) {
+      return value.then(resolve, reject);
+    }
+    setTimeout(() => {
+      if (self.status === PENDING) {
+        self.status = REJECTED;
+        self.value = value;
+        self.rejectedCallback.map((callback) => callback(value));
+      }
+    }, 0);
+  }
+
+  try {
+    fn(resolve, reject);
+  } catch (error) {
+    reject(error);
+  }
+}

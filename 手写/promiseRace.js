@@ -5,9 +5,16 @@ function promiseRace(promises) {
     });
   });
 }
+// let promiseRace = (promiseArr) => {
+//   return new Promise((resolve, reject) => {
+//     for (let promise of promiseArr) {
+//       promise.then(resolve, reject);
+//     }
+//   });
+// };
 let p1 = new Promise(function (resolve, reject) {
   setTimeout(function () {
-    reject(1);
+    resolve(1);
   }, 1000);
 });
 let p2 = new Promise(function (resolve, reject) {
@@ -22,7 +29,7 @@ let p3 = new Promise(function (resolve, reject) {
 });
 promiseRace([p3, p1, p2])
   .then((res) => {
-    console.log(res); // [3, 1, 2]
+    console.log(res);
   })
   .catch((err) => {
     console.log(err);

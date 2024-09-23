@@ -34,3 +34,17 @@ function myNew() {
     result && (typeof result === "object" || typeof result === "function");
   return flag ? result : newObj;
 }
+
+function myNew() {
+  let res = null;
+  const constructor = Array.prototype.shift.call(arguments);
+  let newObj = Object.create(constructor.prototype);
+  if (typeof constructor !== "function") {
+    throw Error;
+  }
+  res = constructor.apply(newObj, arguments);
+
+  let flag = res && (typeof res === "function" || typeof res === "object");
+
+  return flag ? res : newObj;
+}
